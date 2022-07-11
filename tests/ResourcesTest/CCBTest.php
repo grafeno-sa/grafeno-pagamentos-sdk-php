@@ -10,7 +10,7 @@ it('Should simulate the CCB values', function ()
     $installments = 36;
     $first_due_date = '2022-07-01';
 
-    $ccb = $this->grafeno->ccb()->simulateCCB($net_value, $monthly_interest, $installments, $first_due_date);
+    $ccb = $this->grafeno->ccb()->simulate($net_value, $monthly_interest, $installments, $first_due_date);
 
     expect($ccb)
       ->json()
@@ -23,7 +23,7 @@ it('Should simulate the CCB values', function ()
 
 it('Should list the CCB creditors', function () 
 {
-    $creditors = $this->grafeno->ccb()->listCCBCreditors();
+    $creditors = $this->grafeno->ccb()->listCreditors();
 
     expect($creditors)
       ->json()
@@ -33,12 +33,12 @@ it('Should list the CCB creditors', function ()
 
 it('Should create a CCB', function () 
 {
-    $creditors = $this->grafeno->ccb()->listCCBCreditors();
+    $creditors = $this->grafeno->ccb()->listCreditors();
     $response = json_decode($creditors);
 
     $creditor_uuid = $response->data[0]->id;
 
-    $new_ccb = $this->grafeno->ccb()->createCCB([
+    $new_ccb = $this->grafeno->ccb()->create([
       "credorId" => $creditor_uuid,
       "valorLiquido" => "300000.00",
       "jurosMensal" => "10",
@@ -55,11 +55,11 @@ it('Should create a CCB', function ()
 
 it('Should get a CCB', function () 
 {
-    $ccbs = $this->grafeno->ccb()->listCCB();
+    $ccbs = $this->grafeno->ccb()->list();
     $ccb_data = json_decode($ccbs);
     $uuid = $ccb_data->data[0]->id;
 
-    $ccb = $this->grafeno->ccb()->getCCB($uuid);
+    $ccb = $this->grafeno->ccb()->get($uuid);
     $ccb_data = json_decode($ccb);
     $returned_uuid = $ccb_data->data->id;
 
@@ -68,7 +68,7 @@ it('Should get a CCB', function ()
 
 it('Should list the CCBs', function () 
 {
-    $ccb = $this->grafeno->ccb()->listCCB();
+    $ccb = $this->grafeno->ccb()->list();
 
     expect($ccb)
       ->json()
@@ -77,13 +77,13 @@ it('Should list the CCBs', function ()
 
 it('Should update or create the CCB guarantor', function () 
 {
-    $ccb_list = $this->grafeno->ccb()->listCCB();
+    $ccb_list = $this->grafeno->ccb()->list();
     $ccb_data = json_decode($ccb_list);
     $uuid = $ccb_data->data[0]->id;
 
     $guarantor_name = "Dwight Schrute";
 
-    $ccb = $this->grafeno->ccb()->createOrUpdateCCBGuarantor($uuid,[
+    $ccb = $this->grafeno->ccb()->createGuarantor($uuid,[
       "name" => $guarantor_name,
       "documentNumber" => "12345679891",
       "phone" => "11999999999",
@@ -105,13 +105,13 @@ it('Should update or create the CCB guarantor', function ()
 
 it('Should update or create the debtor of CCB', function () 
 {
-    $ccb_list = $this->grafeno->ccb()->listCCB();
+    $ccb_list = $this->grafeno->ccb()->list();
     $ccb_data = json_decode($ccb_list);
     $uuid = $ccb_data->data[0]->id;
     $debtor_name = "Andy Bernard";
     $debtor_email = "the-nard-dog@dcornell.edu";
 
-    $ccb = $this->grafeno->ccb()->createOrUpdateCCBDebtor($uuid, [
+    $ccb = $this->grafeno->ccb()->createDebtor($uuid, [
           "name" => $debtor_name,
           "documentNumber" => "55.054.861/0001-44",
           "phone" => "11999999999",
@@ -147,7 +147,7 @@ it('Should update or create the debtor of CCB', function ()
 
 it('Should upload the guarantor file', function () 
 {
-    $ccb_list = $this->grafeno->ccb()->listCCB();
+    $ccb_list = $this->grafeno->ccb()->list();
     $ccb_data = json_decode($ccb_list);
     $uuid = $ccb_data->data[0]->id;
     $guarantor_id = $ccb_data->data[0]->attributes->avalistas->data[0]->id;
@@ -171,7 +171,7 @@ it('Should upload the guarantor file', function ()
 
 it('Should upload the debtor file', function () 
 {
-    $ccb_list = $this->grafeno->ccb()->listCCB();
+    $ccb_list = $this->grafeno->ccb()->list();
     $ccb_data = json_decode($ccb_list);
     $uuid = $ccb_data->data[0]->id;
 
@@ -193,7 +193,7 @@ it('Should upload the debtor file', function ()
 
 it('Should not upload the debtor file if the file type is incorrect', function () 
 {
-    $ccb_list = $this->grafeno->ccb()->listCCB();
+    $ccb_list = $this->grafeno->ccb()->list();
     $ccb_data = json_decode($ccb_list);
     $uuid = $ccb_data->data[0]->id;
 
@@ -211,11 +211,11 @@ it('Should not upload the debtor file if the file type is incorrect', function (
 
 it('Should send the CCB to analysis', function () 
 {
-    $ccb_list = $this->grafeno->ccb()->listCCB();
+    $ccb_list = $this->grafeno->ccb()->list();
     $ccb_data = json_decode($ccb_list);
     $uuid = $ccb_data->data[0]->id;
 
-    $ccb = $this->grafeno->ccb()->sendCCBToAnalysis($uuid);
+    $ccb = $this->grafeno->ccb()->sendToAnalysis($uuid);
 
     expect($ccb)
       ->json()
@@ -225,11 +225,11 @@ it('Should send the CCB to analysis', function ()
 
 it('Should cancel the CCB', function () 
 { 
-    $ccb_list = $this->grafeno->ccb()->listCCB();
+    $ccb_list = $this->grafeno->ccb()->list();
     $ccb_data = json_decode($ccb_list);
     $uuid = $ccb_data->data[0]->id;
 
-    $ccb = $this->grafeno->ccb()->deleteCCB($uuid);
+    $ccb = $this->grafeno->ccb()->delete($uuid);
 
     expect($ccb)
       ->json()

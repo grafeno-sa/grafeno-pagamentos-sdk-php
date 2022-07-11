@@ -53,7 +53,7 @@ class Transfers
      *
      * @return mixed
      */
-    public function createTransfer(array $data)
+    public function create(array $data)
     {
         $url = $this->interpolate(self::BASE_PATH, [
             'resource' => self::RESOURCE_TRANSFERS,
@@ -69,7 +69,7 @@ class Transfers
      *
      * @return mixed
      */
-    public function listTransfers($page = 1, $per_page = 50)
+    public function list($page = 1, $per_page = 50)
     {
 	    $url = $this->interpolate(self::BASE_PATH, [
 	    'resource' => self::RESOURCE_TRANSFERS.'/pending?page='.$page.'&per_page='.$per_page,
@@ -87,7 +87,7 @@ class Transfers
      *
      * @return mixed
      */
-    public function updateTransfer($transfer_uuid, $state, $reject_reason=null)
+    public function update($transfer_uuid, $state, $reject_reason=null)
     {
         $url = $this->interpolate(self::BASE_PATH, [
             'resource'    => self::RESOURCE_TRANSFERS.'/{transfer_uuid}/update_state',

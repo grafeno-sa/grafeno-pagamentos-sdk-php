@@ -58,7 +58,7 @@ class BankAccounts
      *
      * @return mixed
      */
-    public function listBankAccounts($page = null)
+    public function listAccounts($page = null)
 		{
 			  $url = $this->interpolate(self::BASE_PATH, [
 						'resource' => self::RESOURCE_BANK_ACCOUNTS,
@@ -72,7 +72,7 @@ class BankAccounts
      *
      * @return mixed
      */
-    public function listBankAccountTransactions($page = null, $filter = null)
+    public function listTransactions($page = null, $filter = null)
     {
         $url = $this->interpolate(self::BASE_PATH, [
             'resource' => self::RESOURCE_BANK_TRANSACTIONS.'?page='.$page.'&search'.$filter,

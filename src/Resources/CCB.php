@@ -53,7 +53,7 @@ class CCB
      *
      * @return mixed
      */
-    public function createCCB(array $data, $options = [])
+    public function create(array $data, $options = [])
     {
         $url = $this->interpolate(self::BASE_PATH, [
             'resource' => self::RESOURCE_CCB,
@@ -71,7 +71,7 @@ class CCB
      *
      * @return mixed
      */
-    public function getCCB($ccb_id)
+    public function get($ccb_id)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{ccb_id}', [
             'resource' => self::RESOURCE_CCB,
@@ -88,7 +88,7 @@ class CCB
      *
      * @return mixed
      */
-    public function listCCB($page = 1, $per_page = 50)
+    public function list($page = 1, $per_page = 50)
     {
         $url = $this->interpolate(self::BASE_PATH, [
             'resource' => self::RESOURCE_CCB.'?page='.$page.'&per_page='.$per_page,
@@ -103,7 +103,7 @@ class CCB
      *
      * @return mixed
      */
-    public function listCCBCreditors()
+    public function listCreditors()
 		{
           
 				$url = $this->interpolate(self::BASE_PATH, [
@@ -120,7 +120,7 @@ class CCB
      *
      * @return mixed
      */
-    public function deleteCCB($ccb_id)
+    public function delete($ccb_id)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{ccb_id}/cancel', [
             'resource'    => self::RESOURCE_CCB,
@@ -142,7 +142,7 @@ class CCB
      *
      * @return mixed
      */
-    public function simulateCCB($net_value, $monthly_interest, $installments, $first_due_date)
+    public function simulate($net_value, $monthly_interest, $installments, $first_due_date)
     {
         $url = $this->interpolate(self::BASE_PATH.'/simulate', [
             'resource' => self::RESOURCE_CCB
@@ -168,7 +168,7 @@ class CCB
      *
      * @return mixed
      */
-    public function updateCCB($ccb_id, array $data)
+    public function update($ccb_id, array $data)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{ccb_id}', [
             'resource'    => self::RESOURCE_CCB,
@@ -188,7 +188,7 @@ class CCB
      *
      * @return mixed
      */
-    public function createOrUpdateCCBDebtor($ccb_id, array $data)
+    public function createDebtor($ccb_id, array $data)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{ccb_id}/update_borrower', [
             'resource'    => self::RESOURCE_CCB,
@@ -208,7 +208,7 @@ class CCB
      *
      * @return mixed
      */
-    public function createOrUpdateCCBGuarantor($ccb_id, array $data)
+    public function createGuarantor($ccb_id, array $data)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{ccb_id}/update_guarantor', [
             'resource'    => self::RESOURCE_CCB,
@@ -268,7 +268,7 @@ class CCB
      *
      * @return mixed
      */
-    public function sendCCBToAnalysis($ccb_id)
+    public function sendToAnalysis($ccb_id)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{ccb_id}/submit', [
             'resource'    => self::RESOURCE_CCB,

@@ -5,7 +5,7 @@ use Grafeno\Resources\Beneficiaries;
 
 it('Should not create a beneficiary with an invalid document number', function () 
 {
-  $new_beneficiary = $this->grafeno->beneficiaries()->createBeneficiary([
+  $new_beneficiary = $this->grafeno->beneficiaries()->create([
      "beneficiary" => [
        "name" => "Michael Scott Paper Company, Inc.",
        "document_number" => "00.000.000/0000-00",
@@ -21,7 +21,7 @@ it('Should not create a beneficiary with an invalid document number', function (
 
 it('Should list all the beneficiaries', function () 
 {
-    $beneficiaries = $this->grafeno->beneficiaries()->listBeneficiaries();
+    $beneficiaries = $this->grafeno->beneficiaries()->list();
 
     expect($beneficiaries)
       ->json()

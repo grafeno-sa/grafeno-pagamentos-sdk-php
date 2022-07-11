@@ -60,7 +60,7 @@ class Charges
      *
      * @return mixed
      */
-    public function createCharge(array $data, $options = [])
+    public function create(array $data, $options = [])
     {
         $url = $this->interpolate(self::BASE_PATH, [
             'resource' => self::RESOURCE_CHARGES,
@@ -78,7 +78,7 @@ class Charges
      *
      * @return mixed
      */
-    public function getCharge($charge_uuid)
+    public function get($charge_uuid)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{charge_uuid}', [
             'resource'    => self::RESOURCE_CHARGES,
@@ -93,7 +93,7 @@ class Charges
      *
      * @return mixed
      */
-    public function listCharges($page = 1, $per_page = 50, $filter = null)
+    public function list($page = 1, $per_page = 50, $filter = null)
 		{
           
 				$url = $this->interpolate(self::BASE_PATH, [
@@ -111,7 +111,7 @@ class Charges
      *
      * @return mixed
      */
-    public function deleteCharge($charge_uuid)
+    public function delete($charge_uuid)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{charge_uuid}', [
             'resource'    => self::RESOURCE_CHARGES,
@@ -129,7 +129,7 @@ class Charges
      *
      * @return mixed
      */
-    public function updateCharge($charge_uuid, array $data)
+    public function update($charge_uuid, array $data)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{charge_uuid}', [
             'resource'    => self::RESOURCE_CHARGES,
@@ -148,7 +148,7 @@ class Charges
      *
      * @return mixed
      */
-    public function writeOffCharge($charge_uuid)
+    public function writeOff($charge_uuid)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{charge_uuid}/paid_externally', [
             'resource'    => self::RESOURCE_CHARGES,
@@ -165,7 +165,7 @@ class Charges
      *
      * @return mixed
      */
-    public function protestCharge($charge_uuid)
+    public function protest($charge_uuid)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{charge_uuid}/protest', [
             'resource'    => self::RESOURCE_CHARGES,
@@ -184,7 +184,7 @@ class Charges
      *
      * @return mixed
      */
-    public function cancelProtestCharge($charge_uuid)
+    public function cancelProtest($charge_uuid)
     {
         $url = $this->interpolate(self::BASE_PATH.'/{charge_uuid}/cancel_protest', [
             'resource'    => self::RESOURCE_CHARGES,

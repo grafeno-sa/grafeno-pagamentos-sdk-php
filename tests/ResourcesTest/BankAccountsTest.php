@@ -5,7 +5,7 @@ use Grafeno\Resources\BankAccounts;
 
 it('Should list the bank accounts', function () 
 {
-    $bank_accounts = $this->grafeno->bankAccounts()->listBankAccounts();
+    $bank_accounts = $this->grafeno->bankAccounts()->listAccounts();
 
     $response = $bank_accounts;
     //$account = $response->data[0]->account;
@@ -17,7 +17,7 @@ it('Should list the bank accounts', function ()
 
 it('Should list the bank accounts transactions', function () 
 {
-    $bank_accounts_transactions = $this->grafeno->bankAccounts()->listBankAccountTransactions();
+    $bank_accounts_transactions = $this->grafeno->bankAccounts()->listTransactions();
 
     expect($bank_accounts_transactions)
       ->json()

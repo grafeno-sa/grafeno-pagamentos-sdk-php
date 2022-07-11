@@ -6,7 +6,7 @@ use Grafeno\Resources\Charges;
 
 it('Should create a charge', function () 
 {
-    $new_charge = $this->grafeno->charges()->createCharge([
+    $new_charge = $this->grafeno->charges()->create([
         'boleto'=> [
           'yourNumber'=> '000001',
           'registrationMethod'=> 'online'
@@ -41,7 +41,7 @@ it('Should create a charge', function ()
 
 it('Should not create a charge without due date', function () 
 {
-    $new_charge = $this->grafeno->charges()->createCharge([
+    $new_charge = $this->grafeno->charges()->create([
         'boleto'=> [
           'yourNumber'=> '000001',
           'registrationMethod'=> 'online'
@@ -73,11 +73,11 @@ it('Should not create a charge without due date', function ()
 
 it('Should get a charge', function () 
 {
-    $charges = $this->grafeno->charges()->listCharges();
+    $charges = $this->grafeno->charges()->list();
     $response = json_decode($charges);
     $charge_uuid = $response->data[0]->uuid;
 
-    $charge = $this->grafeno->charges()->getCharge($charge_uuid);
+    $charge = $this->grafeno->charges()->get($charge_uuid);
 
     $charge_data = json_decode($charge);
     $uuid = $charge_data->data->uuid;
@@ -88,7 +88,7 @@ it('Should get a charge', function ()
 
 it('Should list charges', function () 
 {
-    $charges = $this->grafeno->charges()->listCharges();
+    $charges = $this->grafeno->charges()->list();
 
     expect($charges)
       ->json()
@@ -106,11 +106,11 @@ it('Should update a charge', function ()
     $new_date = strtotime("3 weeks");
     $new_date = date('Y-m-d', $new_date);
 
-    $charges = $this->grafeno->charges()->listCharges(null, null, $filter);
+    $charges = $this->grafeno->charges()->list(null, null, $filter);
     $response = json_decode($charges);
     $charge_uuid = $response->data[0]->uuid;
 
-    $new_charge = $this->grafeno->charges()->updateCharge($charge_uuid,
+    $new_charge = $this->grafeno->charges()->update($charge_uuid,
     [
       'dueDate'=> $new_date,
     ]);
@@ -128,11 +128,11 @@ it('Should not protest a charge that has not expired yet', function ()
     $filters = new Filters();
     $filter = $filters->applyFilter(Filters::CREATED_AT_EQ, $today);
 
-    $charges = $this->grafeno->charges()->listCharges(null, null, $filter);
+    $charges = $this->grafeno->charges()->list(null, null, $filter);
     $response = json_decode($charges);
     $charge_uuid = $response->data[0]->uuid;
 
-    $charge = $this->grafeno->charges()->protestCharge($charge_uuid);
+    $charge = $this->grafeno->charges()->protest($charge_uuid);
     $response = $charge;
 
     $this->assertStringContainsString('Não foi possível criar o protesto: Cobrança não está vencida', $response);
@@ -144,11 +144,11 @@ it('Should not cancel a protest that not exists', function ()
     $filters = new Filters();
     $filter = $filters->applyFilter(Filters::CREATED_AT_EQ, $today);
 
-    $charges = $this->grafeno->charges()->listCharges(null, null, $filter);
+    $charges = $this->grafeno->charges()->list(null, null, $filter);
     $response = json_decode($charges);
     $charge_uuid = $response->data[0]->uuid;
 
-    $charge = $this->grafeno->charges()->cancelProtestCharge($charge_uuid);
+    $charge = $this->grafeno->charges()->cancelProtest($charge_uuid);
     $response = $charge;
 
     $this->assertStringContainsString('Protesto não encontrado', $response);
@@ -156,11 +156,11 @@ it('Should not cancel a protest that not exists', function ()
 
 it('Should not delete a charge created in bank slip method', function () 
 {
-    $charges = $this->grafeno->charges()->listCharges();
+    $charges = $this->grafeno->charges()->list();
     $response = json_decode($charges);
     $charge_uuid = $response->data[0]->uuid;
 
-    $charge = $this->grafeno->charges()->deleteCharge($charge_uuid);
+    $charge = $this->grafeno->charges()->delete($charge_uuid);
     $response = $charge;
 
     expect($charge)
@@ -175,13 +175,13 @@ it('Should write off a charge', function ()
     $filters = new Filters();
     $filter = $filters->applyFilter(Filters::CREATED_AT_EQ, $today);
 
-    $charges = $this->grafeno->charges()->listCharges(null, null, $filter);
+    $charges = $this->grafeno->charges()->list(null, null, $filter);
     $response = json_decode($charges);
     $pointer = $response->data;
     $pointer_n = count($pointer) - 1;
     $charge_uuid = $response->data[$pointer_n]->uuid;
 
-    $charge = $this->grafeno->charges()->writeOffCharge($charge_uuid);
+    $charge = $this->grafeno->charges()->writeOff($charge_uuid);
   
     expect($charge)
       ->json()

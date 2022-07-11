@@ -71,14 +71,14 @@ Para obter mais informações sobre este recurso, visite nossa documentação: [
 
 #### Listar contas bancárias
 ```PHP
-$bank_accounts = $grafeno->bankAccounts()->listBankAccounts();
+$bank_accounts = $grafeno->bankAccounts()->listAccounts();
 
 print_r($bank_accounts);
 ```
 
 #### Listar movimentações da conta
 ```PHP
-$bank_accounts_transactions = $grafeno->bankAccounts()->listBankAccountTransactions();
+$bank_accounts_transactions = $grafeno->bankAccounts()->listTransactions();
 
 print_r($bank_accounts_transactions);
 ```
@@ -91,7 +91,7 @@ Para obter mais informações sobre este recurso, visite nossa documentação: [
 
 #### Criar uma cobrança
 ```PHP
-$new_charge = $grafeno->charges()->createCharge(
+$new_charge = $grafeno->charges()->create(
                 [
                     'boleto'=> [
                       'yourNumber'=> '000001',
@@ -121,7 +121,7 @@ print_r($new_charge);
 
 #### Consultar uma cobrança
 ```PHP
-$charge = $grafeno->charges()->getCharge("3806513a-ab67-4314-ad4f-45d293d6851b");
+$charge = $grafeno->charges()->get("3806513a-ab67-4314-ad4f-45d293d6851b");
 
 print_r($charge);
 ```
@@ -131,14 +131,14 @@ print_r($charge);
 $page = 1;
 $per_page = 50;
 
-$charges = $grafeno->charges()->listCharges($page, $per_page);
+$charges = $grafeno->charges()->list($page, $per_page);
 
 print_r($charges);
 ```
 
 #### Atualizar uma cobrança
 ```PHP
-$charge = $grafeno->charges()->updateCharge("3806513a-ab67-4314-ad4f-45d293d6851b",
+$charge = $grafeno->charges()->update("3806513a-ab67-4314-ad4f-45d293d6851b",
                    [
                     'dueDate'=> '2023-12-31',                    ]
                    ]);
@@ -148,28 +148,28 @@ print_r($charge);
 
 #### Dar baixa em uma cobrança
 ```PHP
-$charge_paid = $grafeno->charges()->writeOffCharge("3806513a-ab67-4314-ad4f-45d293d6851b");
+$charge_paid = $grafeno->charges()->writeOff("3806513a-ab67-4314-ad4f-45d293d6851b");
 
 print_r($charge_paid);
 ```
 
 #### Cancelar cobrança
 ```PHP
-$charge_cancelled = $grafeno->charges()->deleteCharge("3806513a-ab67-4314-ad4f-45d293d6851b");
+$charge_cancelled = $grafeno->charges()->delete("3806513a-ab67-4314-ad4f-45d293d6851b");
 
 print_r($charge_cancelled);
 ```
 
 #### Protestar cobrança
 ```PHP
-$charge_protest = $grafeno->charges()->protestCharge("3806513a-ab67-4314-ad4f-45d293d6851b");
+$charge_protest = $grafeno->charges()->protest("3806513a-ab67-4314-ad4f-45d293d6851b");
 
 print_r($charge_protest);
 ```
 
 #### Cancelar protesto
 ```PHP
-$charge_protest = $grafeno->charges()->cancelProtestCharge("3806513a-ab67-4314-ad4f-45d293d6851b");
+$charge_protest = $grafeno->charges()->cancelProtest("3806513a-ab67-4314-ad4f-45d293d6851b");
 
 print_r($charge_protest);
 ```
@@ -189,7 +189,7 @@ Para obter mais informações sobre este recurso, visite nossa documentação: [
 
 #### Adicionar beneficiário
 ```PHP
-$beneficiario = $grafeno->beneficiaries()->createBeneficiary(
+$beneficiario = $grafeno->beneficiaries()->create(
 [
    "beneficiary" => [
       "uuid" => "d81e6f9e-eb26-4b1d-a898-c8f4b3568f9d",
@@ -209,7 +209,7 @@ print_r($beneficiario);
 $page = 1;
 $per_page = 50;
 
-$beneficiarios = $grafeno->beneficiaries()->listBeneficiaries($page, $per_page);
+$beneficiarios = $grafeno->beneficiaries()->list($page, $per_page);
 
 print_r($beneficiarios);
 ```
@@ -222,7 +222,7 @@ Para obter mais informações sobre este recurso, visite nossa documentação: [
 
 #### Criar transferência
 ```PHP
-$nova_transferência = $grafeno->transfers()->createTransfer(
+$nova_transferência = $grafeno->transfers()->create(
 [
    "transfer_request" => [
       "value" => "300.00",
@@ -247,7 +247,7 @@ print_r($nova_transferência);
 $page = 1;
 $per_page = 50;
 
-$transferências = $grafeno->transfers()->listTransfers($page, $per_page);
+$transferências = $grafeno->transfers()->list($page, $per_page);
 
 print_r($transferências);
 ```
@@ -258,7 +258,7 @@ $transfer_uuid = "50d39ac7-bf44-408e-9358-19c2e9ea08f4";
 $state = "approve";
 $reject_reason = null;
 
-$transfer_to_approve = $grafeno->transfers()->updateTransfer($transfer_uuid, $state, $reject_reason);
+$transfer_to_approve = $grafeno->transfers()->update($transfer_uuid, $state, $reject_reason);
 
 print_r($transfer_to_approve);
 ```
@@ -273,7 +273,7 @@ Para obter mais informações sobre este recurso, visite nossa documentação: [
 
 #### Listar credores
 ```PHP
-$creditors = $grafeno->ccb()->listCCBCreditors();
+$creditors = $grafeno->ccb()->listCreditors();
 
 print_r($creditors);
 ```
@@ -285,14 +285,14 @@ $monthly_interest = "5";
 $installments = 36;
 $first_due_date = "2022-12-05";
 
-$simulate_ccb_values = $grafeno->ccb()->simulateCCB($net_value, $monthly_interest, $installments, $first_due_date);
+$simulate_ccb_values = $grafeno->ccb()->simulate($net_value, $monthly_interest, $installments, $first_due_date);
 
 print_r($simulate_ccb_values);
 ```
 
 #### Criar CCB
 ```PHP
-$ccb = $grafeno->ccb()->createCCB(
+$ccb = $grafeno->ccb()->create(
 [
     "credorId" => "2fdc0f06-b424-4c79-91b4-965aadb11313",
     "valorLiquido" => "200000",
@@ -307,21 +307,21 @@ print_r($ccb);
 
 #### Visualizar CCB
 ```PHP
-$ccb = $grafeno->ccb()->getCCB("ab2de14f-d372-4988-b73f-0ee483dcd096");
+$ccb = $grafeno->ccb()->get("ab2de14f-d372-4988-b73f-0ee483dcd096");
 
 print_r($ccb);
 ```
 
 #### Listar CCBs
 ```PHP
-$ccbs = $grafeno->ccb()->listCCB();
+$ccbs = $grafeno->ccb()->list();
 
 print_r($ccbs);
 ```
 
 #### Atualizar CCB
 ```PHP
-$ccb_update = $grafeno->ccb()->updateCCB("ab2de14f-d372-4988-b73f-0ee483dcd096", 
+$ccb_update = $grafeno->ccb()->update("ab2de14f-d372-4988-b73f-0ee483dcd096", 
           [
           "parcelas" => 24
            ]
@@ -332,7 +332,7 @@ print_r($ccb_update);
 
 #### Criar ou atualizar o devedor da CCB
 ```PHP
-$debtor = $grafeno->ccb()->createOrUpdateCCBDebtor("ab2de14f-d372-4988-b73f-0ee483dcd096", 
+$debtor = $grafeno->ccb()->createDebtor("ab2de14f-d372-4988-b73f-0ee483dcd096", 
   [
     "name" => "Andy Bernard",
     "documentNumber" => "55.054.861/0001-44",
@@ -366,7 +366,7 @@ print_r($debtor);
 
 #### Criar ou atualizar o avalista da CCB
 ```PHP
-$guarantor = $grafeno->ccb()->createOrUpdateCCBGuarantor("ab2de14f-d372-4988-b73f-0ee483dcd096", 
+$guarantor = $grafeno->ccb()->createGuarantor("ab2de14f-d372-4988-b73f-0ee483dcd096", 
    [
     "name" => "Dwight Schrute",
     "documentNumber" => "12345679891",
@@ -420,14 +420,14 @@ print_r($guarantor_file);
 
 #### Enviar CCB para análise
 ```PHP
-$ccb = $grafeno->ccb()->sendCCBToAnalysis("ab2de14f-d372-4988-b73f-0ee483dcd096");
+$ccb = $grafeno->ccb()->sendToAnalysis("ab2de14f-d372-4988-b73f-0ee483dcd096");
 
 print_r($ccb);
 ```
 
 #### Cancelar CCB
 ```PHP
-$ccb = $grafeno->ccb()->deleteCCB("ab2de14f-d372-4988-b73f-0ee483dcd096");
+$ccb = $grafeno->ccb()->delete("ab2de14f-d372-4988-b73f-0ee483dcd096");
 
 print_r($ccb);
 ```
@@ -465,7 +465,7 @@ $filters = new Filters();
 
 $filter = $filters->applyFilter(Filters::CREATED_AT_GT_EQ, '2022-05-17');
 
-$charges = $grafeno->charges()->listCharges(null, null, $filter);
+$charges = $grafeno->charges()->list(null, null, $filter);
 
 print_r($charges);
 ```
@@ -482,8 +482,8 @@ Este projeto existe graças a todas as pessoas que contribuem. :rocket: :rocket:
 
 ## Licença
 
-[The MIT License](https://github.com/mariodias/)
+[The MIT License](https://github.com/grafeno-sa/grafeno-pagamentos-sdk-php/blob/master/LICENSE)
 
 ## Changelog
 
-[SDK changelog](https://github.com/mariodias/)
+[SDK changelog](https://github.com/grafeno-sa/grafeno-pagamentos-sdk-php/blob/master/CHANGELOG.md)

@@ -7,7 +7,7 @@ it('Should create a transfer', function ()
 {
     $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
 
-    $new_transfer = $this->grafeno->transfers()->createTransfer([
+    $new_transfer = $this->grafeno->transfers()->create([
       'transfer_request' => [
         'value' => rand(10,100),
         'api_partner_transaction_uuid' => $uuid,
@@ -31,12 +31,12 @@ it('Should create a transfer', function ()
 
 it('Should approve a transfer', function () 
 {
-    $transfers = $this->grafeno->transfers()->listTransfers();
+    $transfers = $this->grafeno->transfers()->list();
 
     $transfer = json_decode($transfers);
     $transfer_uuid = $transfer->data[0]->api_partner_transaction_uuid;
 
-    $transfer_to_approve = $this->grafeno->transfers()->updateTransfer($transfer_uuid, "approve", "Aprovada");
+    $transfer_to_approve = $this->grafeno->transfers()->update($transfer_uuid, "approve", "Aprovada");
 
       expect($transfer_to_approve)
         ->json()
@@ -49,14 +49,14 @@ it('Should not approve or reject a transfer if the api_partner_transaction_uuid 
 {
     $transfer_uuid = "12334456677889999009";
 
-    $transfer_to_approve = $this->grafeno->transfers()->updateTransfer($transfer_uuid, "reject", "Rejeitada");
+    $transfer_to_approve = $this->grafeno->transfers()->update($transfer_uuid, "reject", "Rejeitada");
   
     $this->assertStringContainsString('Record Not Found', $transfer_to_approve);
 });
 
 it('Should list the transfers if has pending transfers', function () 
 {
-    $transfers = $this->grafeno->transfers()->listTransfers();
+    $transfers = $this->grafeno->transfers()->list();
   
       expect($transfers)
         ->json()

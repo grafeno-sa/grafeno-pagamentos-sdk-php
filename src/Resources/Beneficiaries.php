@@ -59,7 +59,7 @@ class Beneficiaries
      *
      * @return mixed
      */
-    public function createBeneficiary(array $data)
+    public function create(array $data)
     {
         $url = $this->interpolate(self::BASE_PATH, [
             'resource' => self::RESOURCE_BENEFICIARIES,
@@ -75,7 +75,7 @@ class Beneficiaries
      *
      * @return mixed
      */
-    public function listBeneficiaries($page = 1, $per_page = 50)
+    public function list($page = 1, $per_page = 50)
     {
 	    $url = $this->interpolate(self::BASE_PATH, [
 	   'resource' => self::RESOURCE_BENEFICIARIES.'?page='.$page.'&per_page='.$per_page,
