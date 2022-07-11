@@ -46,7 +46,13 @@
 Execute o comando abaixo para instalar via [Composer](https://getcomposer.org/):
 
 ```SHELL
-> composer require mariodias/grafeno-sdk-php
+> composer require grafeno.pagamentos/grafeno-sdk-php
+```
+
+ou, após clonar este repositório, basta executar:
+
+```SHELL
+> composer install
 ```
 
 ## Autenticação e definição do ambiente
