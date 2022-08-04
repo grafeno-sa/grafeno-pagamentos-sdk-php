@@ -275,7 +275,7 @@ Uma CCB é um ativo financeiro que representa uma dívida que só pode ser emiti
 
 Através da API Grafeno é possível criar um CCB facilmente, além de ter um total controle sobre os pagamentos efetuados e as cédulas obtidas.
 
-Para obter mais informações sobre este recurso, visite nossa documentação: [CCB]9https://docs.grafeno.digital/reference/5-ccb)
+Para obter mais informações sobre este recurso, visite nossa documentação: [CCB](https://docs.grafeno.digital/reference/5-ccb)
 
 #### Listar credores
 ```PHP
