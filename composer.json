@@ -1,17 +1,21 @@
 {
   "name": "grafeno.pagamentos/grafeno-sdk-php",
-  "description": "",
-  "keywords": ["Grafeno", "charges", "FIDC"],
+  "description": "SDK desenvolvido em PHP para integração com as APIs da grafeno.digital.",
+  "keywords": ["Grafeno", "charges", "FIDC", "CCB", "transfers", "escrow", "CNAB", "payments"],
   "license": "MIT",
   "type": "libraries",
   "support": {
-     "issues": "https://github.com/mariodias/sdk-project-gra/issues",
-     "source": "https://github.com/mariodias/sdk-project-gra/"
+     "issues": "https://github.com/grafeno-sa/grafeno-pagamentos-sdk-php/issues",
+     "source": "https://github.com/grafeno-sa/grafeno-pagamentos-sdk-php/"
  },
   "authors": [
     {
-      "name": "Mário Sérgio Araújo Dias",
-      "email": "mario.dias@ufpi.edu.br"
+      "name": "Mario Dias",
+      "email": "integracao@grafeno.digital"
+    },
+    {
+      "name": "Renan Maia",
+      "email": "integracao@grafeno.digital"
     }
   ],
   "require": {
