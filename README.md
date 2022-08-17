@@ -483,7 +483,7 @@ Aqui na Grafeno, queremos proporcionar uma experiência incrível para todos os 
 
 ## Contribua
 
-Este projeto existe graças a todas as pessoas que contribuem. :rocket: :rocket: :rocket: :rocket: :rocket: :rocket: <br> [[Clique aqui](CONTRIBUTING.md)] para acessar nossas diretrizes de contribuição.
+Este projeto existe graças a todas as pessoas que contribuem. :rocket: :rocket: :rocket: :rocket: :rocket: :rocket: <br> [Clique aqui](CONTRIBUTING.md) para acessar nossas diretrizes de contribuição.
 
 
 ## Licença
