@@ -46,7 +46,7 @@
 Execute o comando abaixo para instalar via [Composer](https://getcomposer.org/):
 
 ```SHELL
-> composer require grafeno.pagamentos/grafeno-sdk-php
+> composer require grafeno-sa/grafeno-pagamentos-sdk-php
 ```
 
 ou, após clonar este repositório, basta executar:
