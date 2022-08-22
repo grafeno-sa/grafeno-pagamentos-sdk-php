@@ -1,5 +1,5 @@
 {
-  "name": "grafeno.pagamentos/grafeno-sdk-php",
+  "name": "grafeno-sa/grafeno-pagamentos-sdk-php",
   "description": "SDK desenvolvido em PHP para integração com as APIs da grafeno.digital.",
   "keywords": ["Grafeno", "charges", "FIDC", "CCB", "transfers", "escrow", "CNAB", "payments"],
   "license": "MIT",
