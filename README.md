@@ -1,4 +1,4 @@
-## Index
+## Grafeno Pagamentos - SDK PHP
 - [Instalação](#instalação)
 - [Autenticação e definição do ambiente](#autenticação-e-definição-do-ambiente)
 - [Contas](#contas)
