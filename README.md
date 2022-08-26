@@ -1,4 +1,16 @@
 ## Grafeno Pagamentos - SDK PHP
+
+ > Statistics
+
+  [![Total Downloads](https://poser.pugx.org/grafeno-sa/grafeno-pagamentos-sdk-php/downloads)](https://packagist.org/packages/grafeno-sa/grafeno-pagamentos-sdk-php)
+  [![Monthly Downloads](https://poser.pugx.org/grafeno-sa/grafeno-pagamentos-sdk-php/d/monthly)](https://packagist.org/packages/grafeno-sa/grafeno-pagamentos-sdk-php)
+
+  > Versions
+
+  [![Latest Stable Version](https://poser.pugx.org/grafeno-sa/grafeno-pagamentos-sdk-php/v/stable)](https://packagist.org/packages/grafeno-sa/grafeno-pagamentos-sdk-php)
+  [![Latest Unstable Version](https://poser.pugx.org/grafeno-sa/grafeno-pagamentos-sdk-php/v/unstable)](https://packagist.org/packages/grafeno-sa/grafeno-pagamentos-sdk-php#dev-master)
+
+  ---
 - [Instalação](#instalação)
 - [Autenticação e definição do ambiente](#autenticação-e-definição-do-ambiente)
 - [Contas](#contas)
